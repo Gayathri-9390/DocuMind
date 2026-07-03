@@ -1,0 +1,14 @@
+# Secrets - never commit
+.env
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Vector store cache (regenerated each run, no need to commit)
+chroma_store/
+
+# OS files
+.DS_Store
+Thumbs.db
