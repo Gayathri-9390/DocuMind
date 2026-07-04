@@ -22,13 +22,16 @@ st.caption("Upload PDFs, ask questions, get answers grounded in your documents (
 with st.sidebar:
     st.header("⚙️ Setup")
     default_key = os.getenv("GROQ_API_KEY", "")
-    groq_api_key = st.text_input(
-        "Groq API Key",
-        value=default_key,
-        type="password",
-        help="Get a free key at https://console.groq.com/keys. "
-             "Tip: set GROQ_API_KEY in a .env file to skip pasting it each time.",
-    )
+    if default_key:
+        # Key is set via environment — don't expose the field publicly
+        groq_api_key = default_key
+        st.success("API key loaded ✅", icon="🔑")
+    else:
+        groq_api_key = st.text_input(
+            "Groq API Key",
+            type="password",
+            help="Get a free key at https://console.groq.com/keys",
+        )
     st.divider()
     uploaded_files = st.file_uploader(
         "Upload PDF document(s)",
